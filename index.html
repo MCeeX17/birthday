@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 22nd Birthday Andiswa | From Mopeli Mopeli</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for luxurious typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,800;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: radial-gradient(circle at 50% 20%, #1a0b2e 0%, #0d0617 50%, #05020a 100%);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .font-serif-luxury {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+        }
+
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Shimmering Gold & Rose Gradient Text */
+        .text-gold-shimmer {
+            background: linear-gradient(135deg, #FFF6D6 0%, #F5D061 25%, #E5A65D 50%, #FFDF79 75%, #FFFFFF 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmerEffect 4s ease infinite;
+        }
+
+        .text-rose-glow {
+            background: linear-gradient(135deg, #ffd1dc 0%, #ff8da1 50%, #f43f5e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes shimmerEffect {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glassmorphism Styling */
+        .glass-panel {
+            background: rgba(22, 11, 38, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 215, 185, 0.18);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 
+                        0 0 30px rgba(225, 29, 72, 0.15),
+                        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+        }
+
+        .glass-button {
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.25), rgba(217, 70, 239, 0.2));
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 215, 200, 0.3);
+            box-shadow: 0 4px 20px rgba(244, 63, 94, 0.25);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-button:hover {
+            transform: translateY(-2px) scale(1.02);
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.4), rgba(217, 70, 239, 0.35));
+            box-shadow: 0 8px 25px rgba(244, 63, 94, 0.45);
+        }
+
+        .glass-button:active {
+            transform: translateY(1px) scale(0.98);
+        }
+
+        /* Floating Animation */
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(1deg); }
+        }
+
+        .animate-float {
+            animation: gentleFloat 5s ease-in-out infinite;
+        }
+
+        /* Pulse Ring */
+        @keyframes pulseGlow {
+            0% { transform: scale(0.95); opacity: 0.7; box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7); }
+            70% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 20px rgba(244, 63, 94, 0); }
+            100% { transform: scale(0.95); opacity: 0.7; box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+        }
+
+        .pulse-box {
+            animation: pulseGlow 2.5s infinite;
+        }
+
+        /* Canvas Fullscreen */
+        #fxCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0412;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4c1d95;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="text-slate-100 flex flex-col items-center justify-center min-h-screen relative overflow-x-hidden selection:bg-rose-500 selection:text-white">
+
+    <!-- FX Canvas for blooming flowers, fireworks, sparkles, & interactive touches -->
+    <canvas id="fxCanvas"></canvas>
+
+    <!-- Audio toggle button (Top Right) -->
+    <div class="fixed top-4 right-4 z-50 flex items-center space-x-2">
+        <button id="soundToggleBtn" class="flex items-center space-x-2 px-3.5 py-2 rounded-full glass-panel text-xs tracking-wider uppercase text-rose-200 hover:text-white transition-all cursor-pointer">
+            <span id="soundIcon">🔊</span>
+            <span id="soundText" class="font-medium">Chimes On</span>
+        </button>
+    </div>
+
+    <!-- Background Atmospheric Elements -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute -top-32 -left-32 w-96 h-96 bg-rose-600/15 rounded-full blur-[120px]"></div>
+        <div class="absolute top-1/2 -right-32 w-[30rem] h-[30rem] bg-purple-600/15 rounded-full blur-[140px]"></div>
+        <div class="absolute -bottom-32 left-1/3 w-96 h-96 bg-amber-500/10 rounded-full blur-[130px]"></div>
+    </div>
+
+    <!-- INITIAL SCREEN: Mysterious Glowing Gift Box / Envelope -->
+    <div id="introScreen" class="relative z-30 flex flex-col items-center justify-center p-6 text-center max-w-lg transition-all duration-1000">
+        <!-- Front banner -->
+        <div class="mb-8">
+            <div class="text-xs uppercase tracking-[0.3em] text-rose-300/80 mb-2 font-medium">🎁 A Present from</div>
+            <h2 class="text-gold-shimmer font-serif-luxury font-semibold text-4xl sm:text-5xl tracking-wider drop-shadow-[0_4px_20px_rgba(245,208,97,0.3)]">Mopeli Mopeli</h2>
+        </div>
+        <div class="relative group cursor-pointer" id="openSurpriseBtn">
+            <!-- Ambient Glow -->
+            <div class="absolute -inset-4 bg-gradient-to-r from-rose-500 via-purple-500 to-amber-400 rounded-3xl blur-xl opacity-60 group-hover:opacity-100 transition duration-1000 group-hover:duration-300 animate-pulse"></div>
+            
+            <!-- Gift Container -->
+            <div class="relative w-48 h-48 sm:w-56 sm:h-56 glass-panel rounded-3xl flex flex-col items-center justify-center p-6 border border-pink-400/40 shadow-2xl transition transform duration-500 group-hover:scale-105">
+                <div class="relative w-24 h-24 mb-3 flex items-center justify-center">
+                    <!-- SVG Gift Box with animated ribbon -->
+                    <svg viewBox="0 0 100 100" class="w-full h-full filter drop-shadow-[0_0_15px_rgba(244,63,94,0.7)] animate-float">
+                        <defs>
+                            <linearGradient id="boxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ff4b72" />
+                                <stop offset="100%" stop-color="#831843" />
+                            </linearGradient>
+                            <linearGradient id="goldRibbon" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FFF3B0" />
+                                <stop offset="50%" stop-color="#E2B13C" />
+                                <stop offset="100%" stop-color="#8E6308" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Box Base -->
+                        <rect x="20" y="42" width="60" height="48" rx="8" fill="url(#boxGrad)" stroke="#fecdd3" stroke-width="1.5" />
+                        <!-- Box Lid -->
+                        <rect x="15" y="32" width="70" height="15" rx="4" fill="#fb7185" stroke="#ffe4e6" stroke-width="1.5" />
+                        <!-- Ribbons -->
+                        <rect x="44" y="32" width="12" height="58" fill="url(#goldRibbon)" />
+                        <!-- Ribbon Bow -->
+                        <path d="M 50 32 C 40 18, 20 20, 36 32 Z" fill="url(#goldRibbon)" />
+                        <path d="M 50 32 C 60 18, 80 20, 64 32 Z" fill="url(#goldRibbon)" />
+                        <circle cx="50" cy="32" r="4.5" fill="#FFF275" />
+                    </svg>
+                    <!-- Sparkle accents -->
+                    <span class="absolute -top-1 -right-1 text-yellow-300 text-lg animate-ping">✨</span>
+                    <span class="absolute bottom-2 -left-2 text-pink-300 text-sm animate-pulse">🌸</span>
+                </div>
+                
+                <span class="text-xs font-semibold tracking-widest uppercase text-rose-300/90 mb-1">A Special Delivery</span>
+                <span class="font-display font-semibold text-lg text-white group-hover:text-amber-200 transition-colors">Tap to Open</span>
+            </div>
+        </div>
+
+        <p class="mt-8 text-sm sm:text-base text-rose-200/75 max-w-xs font-light tracking-wide">
+            Prepared exclusively for <span class="font-semibold text-rose-300">Andiswa</span> on her 22nd Birthday.
+        </p>
+    </div>
+
+    <!-- MAIN CELEBRATION CARD SCREEN (Initially hidden, revealed on click) -->
+    <main id="mainCard" class="hidden relative z-20 w-full max-w-xl mx-auto p-4 sm:p-6 my-auto transition-all duration-1000 opacity-0 transform translate-y-8">
+        
+        <!-- Card Container with Glassmorphism and Romantic Glow -->
+        <div class="glass-panel rounded-3xl p-6 sm:p-10 relative overflow-hidden text-center border border-rose-400/25">
+            
+            <!-- Shimmering top decorative bar -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-rose-400 to-transparent opacity-75"></div>
+
+            <!-- Golden 22 Badge -->
+            <div class="inline-flex items-center justify-center space-x-2 px-4 py-1.5 rounded-full bg-rose-500/10 border border-rose-300/30 mb-6 backdrop-blur-sm">
+                <span class="text-amber-300 text-sm">✨</span>
+                <span class="text-xs uppercase tracking-widest text-amber-200 font-medium">Chapter 22 Celebration</span>
+                <span class="text-amber-300 text-sm">✨</span>
+            </div>
+
+            <!-- Main Heading with Luxurious Typography -->
+            <h1 class="font-display text-3xl sm:text-5xl font-bold tracking-tight mb-2">
+                <span class="block text-slate-100 text-xl sm:text-2xl font-light font-serif-luxury italic mb-1">Happy 22nd Birthday</span>
+                <span class="text-gold-shimmer font-serif-luxury tracking-wide text-4xl sm:text-6xl drop-shadow-[0_4px_20px_rgba(245,208,97,0.3)]">Andiswa</span>
+            </h1>
+
+            <!-- Interactive Blooming Flowers Canvas Container (In-Card Flower Preview) -->
+            <div class="relative w-full h-44 sm:h-52 my-4 rounded-2xl flex items-center justify-center overflow-hidden bg-gradient-to-b from-purple-950/40 to-black/40 border border-pink-500/20">
+                <canvas id="bouquetCanvas" class="w-full h-full"></canvas>
+                <div class="absolute bottom-2 text-[10px] sm:text-xs text-rose-300/70 tracking-wider font-light flex items-center space-x-1 pointer-events-none">
+                    <span>🌹 Blooming Forever In Your Honor</span>
+                </div>
+            </div>
+
+            <!-- Heartfelt Personal Message -->
+            <div class="relative my-6 px-3 sm:px-6">
+                <!-- Quote marks accent -->
+                <span class="text-4xl font-serif-luxury text-rose-400/30 absolute -top-4 left-0 leading-none select-none">“</span>
+                
+                <p class="font-serif-luxury italic text-lg sm:text-2xl text-rose-100 leading-relaxed sm:leading-loose tracking-wide px-2 drop-shadow">
+                    I hope this puts a smile on your face the same way you put it on mine whenever i see you pop up on my timeline
+                </p>
+                
+                <span class="text-4xl font-serif-luxury text-rose-400/30 absolute -bottom-6 right-0 leading-none select-none">”</span>
+            </div>
+
+            <!-- Sender Signature -->
+            <div class="mt-8 pt-6 border-t border-rose-500/20 flex flex-col items-center">
+                <div class="text-xs uppercase tracking-widest text-rose-300/70 mb-1 font-medium">Warmest Wishes From</div>
+                <div class="font-serif-luxury font-semibold text-2xl sm:text-3xl text-gold-shimmer tracking-wider">
+                    Mopeli Mopeli
+                </div>
+            </div>
+
+            <!-- Interactive Action Buttons -->
+            <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                <button id="addFlowerBtn" class="glass-button py-3 px-4 rounded-xl flex items-center justify-center space-x-2 text-sm font-medium text-rose-100 hover:text-white cursor-pointer group">
+                    <span class="group-hover:rotate-12 transition-transform duration-300">🌸</span>
+                    <span>Bloom Another Rose</span>
+                </button>
+
+                <button id="wishBtn" class="glass-button py-3 px-4 rounded-xl flex items-center justify-center space-x-2 text-sm font-medium text-amber-100 hover:text-white cursor-pointer group">
+                    <span class="group-hover:scale-125 transition-transform duration-300">💫</span>
+                    <span>Make 22nd Wish</span>
+                </button>
+            </div>
+
+            <!-- Hint for screen touch -->
+            <p class="mt-6 text-[11px] text-rose-200/50 uppercase tracking-widest">
+                Tap anywhere on your screen for fireworks & petals ✨
+            </p>
+        </div>
+
+        <!-- Footer Love note -->
+        <footer class="mt-6 text-center text-xs text-rose-300/40">
+            Crafted with heart for Andiswa's 22nd milestone
+        </footer>
+    </main>
+
+    <!-- JAVASCRIPT: Synthesizer, Dynamic Particle System, and Procedural Blooming Bouquet -->
+    <script>
+        /* ==========================================================================
+           1. Web Audio API Synthesizer (Zero external dependencies)
+           ========================================================================== */
+        class BirthdayAudio {
+            constructor() {
+                this.ctx = null;
+                this.isMuted = false;
+            }
+
+            init() {
+                if (!this.ctx) {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    this.ctx = new AudioContext();
+                }
+                if (this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+            }
+
+            // Play dreamy celestial chime chord
+            playChime(freq = 523.25, timeOffset = 0, duration = 1.6) {
+                if (this.isMuted) return;
+                this.init();
+                
+                const now = this.ctx.currentTime + timeOffset;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+
+                // Sine wave with slight harmonics
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, now);
+
+                gain.gain.setValueAtTime(0.001, now);
+                gain.gain.exponentialRampToValueAtTime(0.18, now + 0.04);
+                gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+
+                osc.start(now);
+                osc.stop(now + duration);
+            }
+
+            // Arpeggio chord progression for the grand reveal
+            playCelebrationChord() {
+                if (this.isMuted) return;
+                // Harmonic Pentatonic scale in C Major / A Minor: C5, E5, G5, B5, C6, E6
+                const notes = [523.25, 659.25, 783.99, 987.77, 1046.50, 1318.51];
+                notes.forEach((freq, idx) => {
+                    this.playChime(freq, idx * 0.1, 2.2);
+                });
+            }
+
+            // Soft firework popping sound
+            playBurstSound() {
+                if (this.isMuted) return;
+                this.init();
+                const now = this.ctx.currentTime;
+                
+                // Gentle low pop
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(140, now);
+                osc.frequency.exponentialRampToValueAtTime(40, now + 0.15);
+
+                gain.gain.setValueAtTime(0.12, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+
+                osc.start(now);
+                osc.stop(now + 0.2);
+
+                // High shimmer accent
+                this.playChime(880 + Math.random() * 400, 0.05, 0.8);
+            }
+        }
+
+        const sound = new BirthdayAudio();
+
+        // Sound Toggle Button Logic
+        const soundToggleBtn = document.getElementById('soundToggleBtn');
+        const soundIcon = document.getElementById('soundIcon');
+        const soundText = document.getElementById('soundText');
+
+        soundToggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sound.init();
+            sound.isMuted = !sound.isMuted;
+            if (sound.isMuted) {
+                soundIcon.textContent = '🔇';
+                soundText.textContent = 'Muted';
+            } else {
+                soundIcon.textContent = '🔊';
+                soundText.textContent = 'Chimes On';
+                sound.playChime(659.25, 0, 1);
+            }
+        });
+
+        /* ==========================================================================
+           2. Fullscreen Canvas: Fireworks, Stardust & Floating Heart Petals
+           ========================================================================== */
+        const fxCanvas = document.getElementById('fxCanvas');
+        const ctx = fxCanvas.getContext('2d');
+
+        let width = (fxCanvas.width = window.innerWidth);
+        let height = (fxCanvas.height = window.innerHeight);
+
+        window.addEventListener('resize', () => {
+            width = fxCanvas.width = window.innerWidth;
+            height = fxCanvas.height = window.innerHeight;
+        });
+
+        // Particle System
+        const particles = [];
+        const backgroundStars = [];
+
+        // Seed ambient stardust
+        for (let i = 0; i < 70; i++) {
+            backgroundStars.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                radius: Math.random() * 1.5 + 0.5,
+                alpha: Math.random() * 0.8 + 0.2,
+                speed: Math.random() * 0.02 + 0.005,
+                phase: Math.random() * Math.PI * 2
+            });
+        }
+
+        // Firework particle constructor
+        class FireworkParticle {
+            constructor(x, y, color, type = 'spark') {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.type = type; // 'spark', 'petal', or 'text22'
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 5 + 1.5;
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed;
+                this.alpha = 1;
+                this.decay = Math.random() * 0.015 + 0.008;
+                this.gravity = 0.06;
+                this.size = Math.random() * 3 + 2;
+                this.rotation = Math.random() * Math.PI;
+                this.rotSpeed = (Math.random() - 0.5) * 0.1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vy += this.gravity;
+                this.alpha -= this.decay;
+                this.rotation += this.rotSpeed;
+                this.vx *= 0.98;
+                this.vy *= 0.98;
+            }
+
+            draw(c) {
+                if (this.alpha <= 0) return;
+                c.save();
+                c.globalAlpha = Math.max(0, this.alpha);
+                c.translate(this.x, this.y);
+                c.rotate(this.rotation);
+
+                if (this.type === 'petal') {
+                    // Draw delicate rose petal
+                    c.fillStyle = this.color;
+                    c.beginPath();
+                    c.moveTo(0, 0);
+                    c.bezierCurveTo(this.size * 2, -this.size, this.size * 2, this.size * 2, 0, this.size * 3);
+                    c.bezierCurveTo(-this.size * 2, this.size * 2, -this.size * 2, -this.size, 0, 0);
+                    c.fill();
+                } else if (this.type === 'heart') {
+                    // Draw glowing heart
+                    c.fillStyle = this.color;
+                    c.beginPath();
+                    const s = this.size * 0.7;
+                    c.moveTo(0, 0);
+                    c.bezierCurveTo(-s, -s, -s * 2, s / 3, 0, s * 2);
+                    c.bezierCurveTo(s * 2, s / 3, s, -s, 0, 0);
+                    c.fill();
+                } else {
+                    // Sparkling star/dot
+                    c.fillStyle = this.color;
+                    c.shadowColor = this.color;
+                    c.shadowBlur = 10;
+                    c.beginPath();
+                    c.arc(0, 0, this.size, 0, Math.PI * 2);
+                    c.fill();
+                }
+
+                c.restore();
+            }
+        }
+
+        // Palette for celebratory fireworks
+        const fireworkPalette = [
+            '#f43f5e', '#fb7185', '#fda4af', // Roses
+            '#e879f9', '#c084fc', '#d946ef', // Violets
+            '#fbbf24', '#fde047', '#fff176', // Warm Gold
+            '#ffffff'
+        ];
+
+        function createBurst(x, y, count = 45, petalRatio = 0.35) {
+            sound.playBurstSound();
+            for (let i = 0; i < count; i++) {
+                const color = fireworkPalette[Math.floor(Math.random() * fireworkPalette.length)];
+                const isPetal = Math.random() < petalRatio;
+                const type = isPetal ? (Math.random() > 0.5 ? 'petal' : 'heart') : 'spark';
+                particles.push(new FireworkParticle(x, y, color, type));
+            }
+        }
+
+        // Render loop for main FX Canvas
+        function animateFX() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Draw drifting stardust
+            for (let star of backgroundStars) {
+                star.phase += star.speed;
+                const dynamicAlpha = star.alpha + Math.sin(star.phase) * 0.25;
+                ctx.fillStyle = `rgba(254, 243, 199, ${Math.max(0.1, dynamicAlpha)})`;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Update & Draw particles
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.update();
+                p.draw(ctx);
+                if (p.alpha <= 0) {
+                    particles.splice(i, 1);
+                }
+            }
+
+            requestAnimationFrame(animateFX);
+        }
+
+        // Listen for screen clicks / taps to trigger fireworks anywhere
+        window.addEventListener('pointerdown', (e) => {
+            // Avoid conflict with buttons directly
+            const targetTag = e.target.tagName.toLowerCase();
+            if (targetTag !== 'button' && !e.target.closest('button')) {
+                createBurst(e.clientX, e.clientY, 35, 0.4);
+            }
+        });
+
+        /* ==========================================================================
+           3. Procedural Blooming Bouquet Canvas (Inside the Birthday Card)
+           ========================================================================== */
+        const bouquetCanvas = document.getElementById('bouquetCanvas');
+        const bCtx = bouquetCanvas.getContext('2d');
+        let bWidth, bHeight;
+
+        function resizeBouquetCanvas() {
+            const rect = bouquetCanvas.getBoundingClientRect();
+            bWidth = bouquetCanvas.width = rect.width * (window.devicePixelRatio || 1);
+            bHeight = bouquetCanvas.height = rect.height * (window.devicePixelRatio || 1);
+            bCtx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+        }
+
+        class BloomingFlower {
+            constructor(x, y, targetPetalRadius, maxLayers, colorTheme) {
+                this.x = x;
+                this.y = y;
+                this.targetRadius = targetPetalRadius;
+                this.maxLayers = maxLayers;
+                this.colorTheme = colorTheme; // { base, mid, highlight }
+                this.growth = 0; // 0 to 1
+                this.growthSpeed = 0.008 + Math.random() * 0.006;
+                this.wobble = Math.random() * Math.PI * 2;
+                this.stemHeight = 80 + Math.random() * 40;
+            }
+
+            update() {
+                if (this.growth < 1) {
+                    this.growth = Math.min(1, this.growth + this.growthSpeed);
+                }
+                this.wobble += 0.02;
+            }
+
+            draw(ctx) {
+                const effectiveGrowth = easeOutCubic(this.growth);
+                const currentRadius = this.targetRadius * effectiveGrowth;
+
+                ctx.save();
+                ctx.translate(this.x, this.y);
+
+                // Draw delicate green stem first
+                ctx.strokeStyle = '#2d6a4f';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                const stemSway = Math.sin(this.wobble) * 4;
+                ctx.quadraticCurveTo(stemSway, this.stemHeight * 0.5, stemSway * 0.5, this.stemHeight);
+                ctx.stroke();
+
+                // Small green leaf
+                if (effectiveGrowth > 0.4) {
+                    ctx.save();
+                    ctx.fillStyle = '#40916c';
+                    ctx.beginPath();
+                    ctx.ellipse(stemSway + 10, this.stemHeight * 0.4, 12 * effectiveGrowth, 5 * effectiveGrowth, Math.PI / 4, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+
+                // Draw procedural blossoming petals in rotating layers
+                for (let layer = this.maxLayers; layer >= 1; layer--) {
+                    const petalsInLayer = 5 + layer * 2;
+                    const layerRadius = (currentRadius / this.maxLayers) * layer;
+                    const layerAngleOffset = (layer * 0.4) + Math.sin(this.wobble * 0.5) * 0.05;
+
+                    for (let p = 0; p < petalsInLayer; p++) {
+                        const angle = (p / petalsInLayer) * Math.PI * 2 + layerAngleOffset;
+                        const petalLength = layerRadius;
+                        const petalWidth = layerRadius * 0.65;
+
+                        ctx.save();
+                        ctx.rotate(angle);
+
+                        // Gradient fill for lush velvety look
+                        const grad = ctx.createRadialGradient(0, -petalLength * 0.5, 2, 0, -petalLength * 0.5, petalLength);
+                        grad.addColorStop(0, this.colorTheme.highlight);
+                        grad.addColorStop(0.5, this.colorTheme.mid);
+                        grad.addColorStop(1, this.colorTheme.base);
+
+                        ctx.fillStyle = grad;
+                        ctx.beginPath();
+                        ctx.moveTo(0, 0);
+                        ctx.bezierCurveTo(-petalWidth, -petalLength * 0.4, -petalWidth, -petalLength, 0, -petalLength);
+                        ctx.bezierCurveTo(petalWidth, -petalLength, petalWidth, -petalLength * 0.4, 0, 0);
+                        ctx.fill();
+
+                        // Shimmer edge
+                        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+
+                        ctx.restore();
+                    }
+                }
+
+                // Glowing Golden Core with 22nd sparkle vibes
+                if (effectiveGrowth > 0.6) {
+                    const coreRadius = (currentRadius * 0.22) * ((effectiveGrowth - 0.6) / 0.4);
+                    const coreGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, coreRadius);
+                    coreGrad.addColorStop(0, '#FFFBEB');
+                    coreGrad.addColorStop(0.6, '#F59E0B');
+                    coreGrad.addColorStop(1, '#92400E');
+
+                    ctx.fillStyle = coreGrad;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, coreRadius, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Micro pistil sparks
+                    ctx.fillStyle = '#FEF3C7';
+                    for (let k = 0; k < 6; k++) {
+                        const sparkAngle = (k / 6) * Math.PI * 2 + this.wobble;
+                        const dist = coreRadius * 0.7;
+                        ctx.beginPath();
+                        ctx.arc(Math.cos(sparkAngle) * dist, Math.sin(sparkAngle) * dist, 1.2, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+
+                ctx.restore();
+            }
+        }
+
+        function easeOutCubic(x) {
+            return 1 - Math.pow(1 - x, 3);
+        }
+
+        const floralPalettes = [
+            { base: '#9f1239', mid: '#f43f5e', highlight: '#fecdd3' }, // Royal Velvet Rose
+            { base: '#701a75', mid: '#c026d3', highlight: '#f5d0fe' }, // Radiant Orchid Violet
+            { base: '#be123c', mid: '#fb7185', highlight: '#ffe4e6' }, // Pastel Peony
+            { base: '#b45309', mid: '#f59e0b', highlight: '#fef3c7' }  // Golden Sun Blossom
+        ];
+
+        let bouquetFlowers = [];
+
+        function initBouquet() {
+            resizeBouquetCanvas();
+            bouquetFlowers = [];
+
+            const rect = bouquetCanvas.getBoundingClientRect();
+            const cX = rect.width / 2;
+            const cY = rect.height * 0.62;
+
+            // Generate an artistic bouquet arrangement
+            const flowerConfigs = [
+                { dx: 0, dy: -18, r: 36, l: 4, palette: floralPalettes[0] },      // Center main Rose
+                { dx: -55, dy: 6, r: 28, l: 3, palette: floralPalettes[1] },     // Left Orchid
+                { dx: 55, dy: 6, r: 28, l: 3, palette: floralPalettes[2] },      // Right Pink Peony
+                { dx: -30, dy: -32, r: 24, l: 3, palette: floralPalettes[3] },   // Upper Left Golden
+                { dx: 30, dy: -32, r: 24, l: 3, palette: floralPalettes[0] }     // Upper Right Rose
+            ];
+
+            flowerConfigs.forEach(cfg => {
+                bouquetFlowers.push(new BloomingFlower(cX + cfg.dx, cY + cfg.dy, cfg.r, cfg.l, cfg.palette));
+            });
+        }
+
+        function animateBouquet() {
+            const rect = bouquetCanvas.getBoundingClientRect();
+            bCtx.clearRect(0, 0, rect.width, rect.height);
+
+            // Draw glowing halo in bouquet background
+            const haloGrad = bCtx.createRadialGradient(rect.width / 2, rect.height * 0.6, 10, rect.width / 2, rect.height * 0.6, 120);
+            haloGrad.addColorStop(0, 'rgba(244, 63, 94, 0.22)');
+            haloGrad.addColorStop(0.6, 'rgba(192, 38, 211, 0.1)');
+            haloGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            bCtx.fillStyle = haloGrad;
+            bCtx.fillRect(0, 0, rect.width, rect.height);
+
+            bouquetFlowers.forEach(flower => {
+                flower.update();
+                flower.draw(bCtx);
+            });
+
+            requestAnimationFrame(animateBouquet);
+        }
+
+        // Add a new flower dynamically when clicking "Bloom Another Rose"
+        const addFlowerBtn = document.getElementById('addFlowerBtn');
+        addFlowerBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sound.playChime(784, 0, 1.4);
+            const rect = bouquetCanvas.getBoundingClientRect();
+            const spreadX = (Math.random() - 0.5) * (rect.width * 0.65);
+            const spreadY = (Math.random() - 0.5) * 50;
+            const chosenPalette = floralPalettes[Math.floor(Math.random() * floralPalettes.length)];
+            
+            bouquetFlowers.push(
+                new BloomingFlower(
+                    rect.width / 2 + spreadX,
+                    rect.height * 0.58 + spreadY,
+                    Math.random() * 8 + 24,
+                    3,
+                    chosenPalette
+                )
+            );
+
+            // Also launch flower petals at the button position
+            const btnRect = addFlowerBtn.getBoundingClientRect();
+            createBurst(btnRect.left + btnRect.width / 2, btnRect.top + btnRect.height / 2, 25, 0.6);
+        });
+
+        // 22 Wishes Sparkle Feature
+        const wishBtn = document.getElementById('wishBtn');
+        wishBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sound.playCelebrationChord();
+
+            const rect = wishBtn.getBoundingClientRect();
+            // Launch 22 synchronized golden sparkling bursts across the screen
+            for (let i = 0; i < 22; i++) {
+                setTimeout(() => {
+                    const rx = Math.random() * (width * 0.8) + (width * 0.1);
+                    const ry = Math.random() * (height * 0.7) + (height * 0.15);
+                    createBurst(rx, ry, 22, 0.3);
+                }, i * 90);
+            }
+        });
+
+        /* ==========================================================================
+           4. Opening Experience Transition
+           ========================================================================== */
+        const introScreen = document.getElementById('introScreen');
+        const mainCard = document.getElementById('mainCard');
+        const openSurpriseBtn = document.getElementById('openSurpriseBtn');
+
+        openSurpriseBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sound.init();
+            sound.playCelebrationChord();
+
+            // Fireworks burst from the gift box
+            const boxRect = openSurpriseBtn.getBoundingClientRect();
+            const centerX = boxRect.left + boxRect.width / 2;
+            const centerY = boxRect.top + boxRect.height / 2;
+            createBurst(centerX, centerY, 60, 0.5);
+
+            // Hide Intro Screen smoothly
+            introScreen.style.transform = 'scale(0.8) translateY(-40px)';
+            introScreen.style.opacity = '0';
+
+            setTimeout(() => {
+                introScreen.classList.add('hidden');
+                
+                // Show Main Card
+                mainCard.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    mainCard.classList.remove('opacity-0', 'translate-y-8');
+                    mainCard.classList.add('opacity-100', 'translate-y-0');
+                    initBouquet();
+                });
+
+                // Continuous celebratory fireworks burst sequence
+                [200, 500, 900, 1300, 1800].forEach((delay, idx) => {
+                    setTimeout(() => {
+                        const targetX = width * (0.2 + idx * 0.15);
+                        const targetY = height * 0.25 + (Math.random() - 0.5) * 80;
+                        createBurst(targetX, targetY, 40, 0.4);
+                    }, delay);
+                });
+            }, 600);
+        });
+
+        // Initialize animations on load
+        window.onload = function () {
+            animateFX();
+            animateBouquet();
+            window.addEventListener('resize', () => {
+                if (!mainCard.classList.contains('hidden')) {
+                    resizeBouquetCanvas();
+                }
+            });
+        };
+    </script>
+</body>
+</html>
